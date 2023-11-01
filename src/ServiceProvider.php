@@ -40,8 +40,8 @@ class ServiceProvider extends LaravelServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/application_insights.php', static::DISPLAY_NAME);
 
         $cloudContext = new Cloud();
-        $cloudContext->setRole(env('WEBSITE_SITE_NAME'));
-        $cloudContext->setRoleInstance(env('WEBSITE_INSTANCE_ID'));
+        $cloudContext->setRole(config(static::DISPLAY_NAME . '.cloud_role_name'));
+        $cloudContext->setRoleInstance(config(static::DISPLAY_NAME . '.cloud_role_instance'));
         $context = new Telemetry_Context();
         $context->setCloudContext($cloudContext);
         $client = new Telemetry_Client($context);
